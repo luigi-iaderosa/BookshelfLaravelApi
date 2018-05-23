@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+        /*
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -66,7 +66,7 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-
+*/
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
@@ -76,6 +76,18 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+        ],
+        'pgsql' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'bookshelf'),
+            'username' => env('DB_USERNAME', 'pgadmin'),
+            'password' => env('DB_PASSWORD', 'pgadmin'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
         ],
 
     ],
