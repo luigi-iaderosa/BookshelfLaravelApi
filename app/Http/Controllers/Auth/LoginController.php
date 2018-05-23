@@ -47,5 +47,21 @@ class LoginController extends Controller
         return json_encode($newUser);
     }
 
+    public function attempt(Request $request){
+
+        $dataResult = $this->login($request);
+        return json_encode($dataResult);
+    }
+
+    public function sendLoginResponse(Request $request){
+        return date('Y-m-d').':'.$request->post('username');
+
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw new \Exception('401: Unauthorized');
+    }
+
 
 }
