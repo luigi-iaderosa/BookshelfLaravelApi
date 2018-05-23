@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('signup','Auth\LoginController@signUp');
 Route::post('/login','Auth\LoginController@attempt');
+Route::post('/bookshelf','BookshelfController@addBookshelf');
+Route::post('/bookshelf/book','BookshelfController@addToBookshelf');
+Route::post('/book','BookController@addBook');
+Route::get('/book/{id}','BookController@getBook');
+Route::get('/bookshelf','BookshelfController@getBookshelf');
