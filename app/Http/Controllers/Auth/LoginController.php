@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bookshelf;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Helpers\HelperClass;
@@ -40,6 +41,7 @@ class LoginController extends Controller
     }
 
     public function signUp(Request $request){
+        header('Access-Control-Allow-Origin: *');
         $signUpFields = HelperClass::extractFromRequest($request,['name','username','password']);
         #dd($signUpFields);
         $signUpFields['password'] = bcrypt($signUpFields['password']);
@@ -49,14 +51,28 @@ class LoginController extends Controller
 
     public function attempt(Request $request){
 
+
         $dataResult = $this->login($request);
+
         return json_encode($dataResult);
     }
 
     public function sendLoginResponse(Request $request){
-        return date('Y-m-d').':'.$request->post('username');
+        $owner = BookshelfOwner::where('username',$request->post('username'))->with('bookshelf')->first();
+
+        $bookshelfOwned = Bookshelf::where('id_bookshelf_owner',$owner->id)->first();
+        if ($bookshelfOwned){
+            return ['apitoken'=>date('Y-m-d').':'.$request->post('username'),
+                'user_id'=>$owner->id,'bookshelf_id'=>$bookshelfOwned->id];
+        }
+        /*
+        else return ['apitoken'=>date('Y-m-d').':'.$request->post('username'),
+            'user_id'=>$owner->id,'bookshelf_id'=>1];
+        */
 
     }
+
+
 
     protected function sendFailedLoginResponse(Request $request)
     {

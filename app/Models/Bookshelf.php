@@ -19,7 +19,7 @@ class Bookshelf extends \Illuminate\Database\Eloquent\Model
 
     public function books(){
         return $this->hasMany(BookBookshelf::class,'id_shelf','id')
-            ->with('books');
+            ->with('book');
     }
 
 }

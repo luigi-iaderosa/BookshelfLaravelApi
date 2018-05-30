@@ -22,6 +22,7 @@ Route::post('signup','Auth\LoginController@signUp');
 Route::post('/login','Auth\LoginController@attempt');
 Route::post('/bookshelf','BookshelfController@addBookshelf');
 Route::post('/bookshelf/book','BookshelfController@addToBookshelf');
+Route::delete('/bookshelf/book/{id}','BookshelfController@removeFromBookshelf');
 Route::post('/book','BookController@addBook');
 Route::get('/book/{id}','BookController@getBook');
-Route::get('/bookshelf','BookshelfController@getBookshelf');
+Route::get('/bookshelf/{id}','BookshelfController@getBookshelf');

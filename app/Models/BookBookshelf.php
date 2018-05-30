@@ -17,8 +17,8 @@ class BookBookshelf extends Model
     protected $table = "book_bookshelf";
     protected $fillable = ['id_book','id_shelf'];
 
-    public function books(){
-        return $this->hasMany('App\Models\Book',
+    public function book(){
+        return $this->hasOne('App\Models\Book',
             'id','id_book')->with('author');
     }
 }
