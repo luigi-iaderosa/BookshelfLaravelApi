@@ -85,12 +85,6 @@ class BookshelfController extends AuthUserAwareController
 
         return json_decode($outcome);
 
-
-
-
-
-
-
     }
 
 

@@ -29,6 +29,10 @@ class BookController extends Controller
 
     }
 
+    public function allBooks(Request $request){
+        $books['books'] = Book::with(['author'])->get();
+        return json_encode($books);
+    }
 
 
 }

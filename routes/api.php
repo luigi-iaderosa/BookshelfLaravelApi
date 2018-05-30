@@ -24,5 +24,6 @@ Route::post('/bookshelf','BookshelfController@addBookshelf');
 Route::post('/bookshelf/book','BookshelfController@addToBookshelf');
 Route::delete('/bookshelf/book/{id}','BookshelfController@removeFromBookshelf');
 Route::post('/book','BookController@addBook');
+Route::get('/books','BookController@allBooks');
 Route::get('/book/{id}','BookController@getBook');
 Route::get('/bookshelf/{id}','BookshelfController@getBookshelf');
