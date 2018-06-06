@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('signup','Auth\LoginController@signUp');
-Route::post('/login','Auth\LoginController@attempt');
+Route::post('/login','Auth\LoginController@attempt')->middleware(\App\Http\Middleware\LoginTrack::class);
 Route::post('/bookshelf','BookshelfController@addBookshelf');
 Route::post('/bookshelf/book','BookshelfController@addToBookshelf');
 Route::delete('/bookshelf/book/{id}','BookshelfController@removeFromBookshelf');
