@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use App\Models\LoginTable;
 class LoginOutcomeTrack
 {
     /**
@@ -15,6 +15,22 @@ class LoginOutcomeTrack
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $response = $next($request);
+         $content =  json_decode($response->original,true);
+
+         $loginTableValues['username'] = $content['username'];
+         $loginTableValues['password'] = isset($content['password']) ? $content['password'] : '';
+         if ($loginTableValues['password'] == ''){
+             $loginTableValues['outcome'] = true;
+         }
+         else {
+             $loginTableValues['outcome'] = false;
+         }
+         $loginTableValues['attempt_time'] = date('Y-m-d H:i:s');
+         LoginTable::create($loginTableValues);
+
+        // do something
+        return $response;
+
     }
 }

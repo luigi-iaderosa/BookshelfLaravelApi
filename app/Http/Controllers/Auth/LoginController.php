@@ -63,12 +63,11 @@ class LoginController extends Controller
         $bookshelfOwned = Bookshelf::where('id_bookshelf_owner',$owner->id)->first();
         if ($bookshelfOwned){
             return ['apitoken'=>date('Y-m-d').':'.$request->post('username'),
-                'user_id'=>$owner->id,'bookshelf_id'=>$bookshelfOwned->id];
+                'user_id'=>$owner->id,'bookshelf_id'=>$bookshelfOwned->id,
+                'username'=>$request->post('username')
+                ];
         }
-        /*
-        else return ['apitoken'=>date('Y-m-d').':'.$request->post('username'),
-            'user_id'=>$owner->id,'bookshelf_id'=>1];
-        */
+
 
     }
 
@@ -76,7 +75,11 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        throw new \Exception('401: Unauthorized');
+        $username = $request->post('username');
+        $password = $request->post('password');
+        $apitoken = 0;
+
+       return ['username'=>$username,'password'=>$password,'apitoken'=>$apitoken];
     }
 
 
