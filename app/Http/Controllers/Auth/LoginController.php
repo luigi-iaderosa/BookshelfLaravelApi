@@ -42,7 +42,8 @@ class LoginController extends Controller
 
     public function signUp(Request $request){
         header('Access-Control-Allow-Origin: *');
-        $signUpFields = HelperClass::extractFromRequest($request,['name','username','password']);
+
+        $signUpFields = resolve('helper')->extractFromRequest($request,['name','username','password']);
         #dd($signUpFields);
         $signUpFields['password'] = bcrypt($signUpFields['password']);
         $newUser = BookshelfOwner::create($signUpFields);

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Helpers\HelperClass;
 class HelperClassServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +23,8 @@ class HelperClassServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('helper',function(){
+            return new HelperClass();
+        });
     }
 }

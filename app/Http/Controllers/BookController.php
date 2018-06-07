@@ -16,7 +16,7 @@ use App\Models\Author;
 class BookController extends Controller
 {
     public function addBook(Request $request){
-        $addBookValues = HelperClass::extractFromRequest($request,['title','isbn','id_author']);
+        $addBookValues = resolve('helper')->extractFromRequest($request,['title','isbn','id_author']);
         $book = Book::create($addBookValues);
         return json_encode($book);
     }

@@ -29,7 +29,7 @@ class BookshelfController extends AuthUserAwareController
 
 
 
-        $bookshelfValues = HelperClass::extractFromRequest($request,['bookshelf_description','id_user']);
+        $bookshelfValues = resolve('helper')->extractFromRequest($request,['bookshelf_description','id_user']);
 
         if (!isset($request['id_user']) ) {
 
@@ -48,7 +48,7 @@ class BookshelfController extends AuthUserAwareController
 
     public function addToBookshelf(Request $request)
     {
-        $addToBookshelfValues = HelperClass::extractFromRequest($request, ['id_book', 'id_user']);
+        $addToBookshelfValues =resolve('helper')->extractFromRequest($request, ['id_book', 'id_user']);
         if (!isset($request['id_user'])) {
             $addToBookshelfValues['id_shelf'] = $this->ownedBookshelf->id;
 

@@ -8,7 +8,7 @@
 namespace App\Helpers;
 class HelperClass
 {
-    public static function extractFromRequest($request, $fields ) {
+    public  function extractFromRequest($request, $fields ) {
         $fieldsFromRequest = [];
         foreach ($fields as $f){
             $fieldsFromRequest[$f]=$request->post($f);
@@ -17,7 +17,7 @@ class HelperClass
     }
 
 
-    public static function getAllHeaders(){
+    public  function getAllHeaders(){
         $headers = '';
         foreach ($_SERVER as $name => $value)
         {

@@ -15,8 +15,8 @@ class Controller extends BaseController
     protected $headers;
     public function __construct()
     {
-
-        $this->headers = HelperClass::getAllHeaders();
+        $helper = resolve('helper');
+        $this->headers = $helper->getAllHeaders();
     }
 
 }
