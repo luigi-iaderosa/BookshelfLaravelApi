@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckToken;
 use App\Http\Middleware\LoginOutcomeTrack;
 use App\Http\Middleware\LoginTrack;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -60,6 +61,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'login.track'=> LoginTrack::class,
-        'loginoutcome.track'=> LoginOutcomeTrack::class
+        'loginoutcome.track'=> LoginOutcomeTrack::class,
+        'checkToken'=>CheckToken::class
     ];
 }

@@ -9,9 +9,12 @@ namespace App\Helpers;
 class HelperClass
 {
     public  function extractFromRequest($request, $fields ) {
+
+        $method = $request->method();
         $fieldsFromRequest = [];
         foreach ($fields as $f){
-            $fieldsFromRequest[$f]=$request->post($f);
+
+            $fieldsFromRequest[$f]=$request->$method($f);
         }
         return $fieldsFromRequest;
     }

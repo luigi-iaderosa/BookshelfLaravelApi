@@ -5,8 +5,11 @@ namespace App;
 use App\Models\Bookshelf;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class BookshelfOwner extends Authenticatable
+
+
+class BookshelfOwner extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     public $timestamps = true;
@@ -30,4 +33,19 @@ class BookshelfOwner extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+
+    public function getJWTIdentifier(){
+        return $this->getKey();
+    }
+
+
+    public function getJWTCustomClaims(){
+        return [];
+    }
+
+
+
+
 }
