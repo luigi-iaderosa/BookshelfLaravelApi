@@ -21,9 +21,10 @@ class AuthUserAwareController extends Controller
 
         parent::__construct();
 
-            $this->username = explode(':',$this->headers['Apitoken'])[1];
-            $this->owner = BookshelfOwner::where('username',$this->username)->first();
-            $this->ownedBookshelf = Bookshelf::where('id_bookshelf_owner',$this->owner->id)->first();
+            $userId = auth()->payload()->get('sub');
+            $this->owner = BookshelfOwner::where('id',$userId)->first();
+            $this->username = $this->owner->username;
+            $this->ownedBookshelf = Bookshelf::where('id_bookshelf_owner',$userId)->first();
 
     }
 
